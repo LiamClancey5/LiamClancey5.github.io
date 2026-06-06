@@ -43,9 +43,9 @@ createPlatform(20,630,200,10, "lightblu")
 
 createPlatform(370,170,250,10, "lightblu")
 
-createPlatform(570,100,100,80, "lightblu")
+createPlatform(570,120,100,60, "gray")
 
-createPlatform(670,100,10,600, "lightblu")
+createPlatform(670,120,10,580, "lightblu")
 
 createPlatform(670,700,300,10, "lightblu")
 
@@ -74,17 +74,25 @@ createPlatform(1250,700,300,10, "lightblu")
 createPlatform(1100,700,50,10, "lightblu")
     // TODO 3 - Create Collectables
 
-createCollectable("diamond", 840, 150)
+createCollectable("database", 840, 150)
 
-createCollectable("diamond", 100, 560)
+createCollectable("database", 100, 560)
 
-createCollectable("diamond", 840, 150)
+createCollectable("database", 910, 640)
     
+
     // TODO 4 - Create Cannons
+createCannon("top", 300, 1300)
 
+createCannon("left", 230, 1500)
+    
+createCannon("left", 670, 1)
 
-    
-    
+createCannon("top", 1100, 2000)
+
+createCannon("right", 80, 1000)
+
+createCannon("top", 1270, 1000)
     //////////////////////////////////
     // ONLY CHANGE ABOVE THIS POINT //
     //////////////////////////////////
