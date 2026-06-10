@@ -4,11 +4,16 @@
     <meta charset="utf-8" />
     <title>Bouncing Box</title>
     <script src="jquery.min.js"></script>
+    
+    
+    
+    
+    
     <style>
       .box {
         width: 70px;
         height: 70px;
-        background-color: teal;
+        background-color: rgb(248, 249, 249);
         font-size: 300%;
         text-align: center;
         user-select: none;
@@ -17,12 +22,19 @@
         top: 100px;
         /* Change me! */
         left: 0px;
+        
       }
-
+      
       .board {
-        height: 100vh;
+        background-image: url(https://static.wikia.nocookie.net/virtualyoutuber/images/0/08/Virtual_Witch_Phenomenon_1st_ONE-MAN_LIVE_%E2%80%9CPhenomenon%E2%80%9D_Illustration_by_Umiu_Geso.jpg/revision/latest/scale-to-width-down/1000?cb=20231212021311);
+        background-size: 100%
       }
     </style>
+
+
+
+
+
     <!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
   </head>
 
@@ -49,31 +61,68 @@
         });
 
         // Every 50 milliseconds, call the update Function (see below)
-        setInterval(update, 50);
+        setInterval(update, 10);
 
         // Every time the box is clicked, call the handleBoxClick Function (see below)
         box.on("click", handleBoxClick);
 
         // moves the Box to a new position on the screen along the X-Axis
-        function moveBoxTo(newPositionX) {
-          box.css("left", newPositionX);
-        }
+       function moveBoxTo(newPositionX, newPositionY) {
+                    box.css("left", newPositionX);
+                    box.css("top", newPositionY);
+          }
 
         // changes the text displayed on the Box
         function changeBoxText(newText) {
           box.text(newText);
         }
+        
+        function getRandomColor() {
+          var red = Math.random() *255 
+          var green = Math.random() *255 
+          var blue = Math.random() *255 
+          
+          var rgb = "rgb(" + red + ", " + green + ", " + blue + ")" 
+          // rgb = `rgb(${red}, ${green}, ${blue})`; // --- same as above 
+          
+          box.css("background-color", rgb)
+          
+        }
+
+
+
 
         //////////////////////////////////////////////////////////////////
         /////////////////// YOUR CODE BELOW HERE /////////////////////////
         //////////////////////////////////////////////////////////////////
 
+        var debugMode = false; // setting to true keeps the speed low
+
         // TODO 2 - Variable declarations
-        var positionX = 0;
+        var positionX;
 
         var points = 0;
 
-        var speed = 10
+        var speedX = 1
+
+        var positionY;
+        
+        var speedY = 1;
+        
+        var boardHeight = jQuery(window).height();
+        
+        var randNumX = Math.random() * boardWidth;
+        var randNumY = Math.random() * boardHeight
+
+
+
+
+        var colorStr = getRandomColor;
+        box.css("background-color", colorStr);
+        
+    
+
+
 
         /**
          * This Function will be called 20 times/second.
@@ -81,24 +130,34 @@
          * If the box drifts off the screen, turn it around!
          */
         function update() {
-          moveBoxTo(positionX);
+          moveBoxTo(positionX, positionY)
+        
+              positionX = positionX + speedX; 
+              
+              if (positionX > boardWidth) {
+    
+                speedX *= -1;
+              }
+    
+              if(positionX < 0) {
+    
+    
+                speedX *= -1;
+              }
 
-          positionX = positionX + speed; 
-          
-          if (positionX > boardWidth) {
-
-            speed *= -1;
-          }
-
-          if(positionX < 0) {
-
-
-            speed *= -1;
-          }
-
-
-
-        }
+              positionY = positionY + speedY; 
+              
+              if (positionY > boardHeight) {
+    
+                speedY *= -1;
+              }
+    
+              if(positionY < 0) {
+    
+    
+                speedY *= -1;
+              }
+                    }
 
         /**
          * This Function will be called each time the box is clicked.
@@ -108,13 +167,19 @@
          * - move the box to the left side of the screen.
          */
         function handleBoxClick() {
-          positionX = 0
-
+          positionX = Math.random() * boardWidth;
+          positionY = Math.random() * boardHeight
           changeBoxText(points)
 
           points ++;
 
-          speed = 3 * points + 10;
+          if (debugMode === true) {
+            speedX += 0.7;
+            speedY += 0.7;
+          }
+       
+          getRandomColor()
+        
         }
 
 
